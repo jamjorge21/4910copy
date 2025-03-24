@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h1>Checkout</h1>
+
+  <div id="selected-service">
+    <!-- The selected service and price will be displayed here -->
+    <h3>Service Selected: <span id="service-name"></span></h3>
+    <p>Price: $<span id="service-price"></span></p>
+  </div>
+
+  <h2>Enter Your Information</h2>
+  <form id="checkout-form">
+    <label for="first-name">First Name</label>
+    <input type="text" id="first-name" name="first-name" required>
+    <label for="last-name">Last Name</label>
+    <input type="text" id="last-name" name="last-name" required>
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Retrieve the service and price from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceName = urlParams.get('service');
+    const servicePrice = urlParams.get('price');
+
+    // Display the service and price on the page
+    document.getElementById('service-name').textContent = serviceName.replace(/-/g, ' ').toUpperCase(); // Format service name for display
+    document.getElementById('service-price').textContent = servicePrice;
+
+    // Handle the form submission to collect user info
+    document.getElementById('checkout-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+
+      const orderData = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        service: serviceName.replace(/-/g, ' '),  // Format the service name
+        price: servicePrice
+      };
+
+      // Send the data to the backend (server) to store it in MySQL
+      fetch('/submit-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'Order submitted successfully') {
+          alert('Your order has been submitted successfully!');
+          window.location.href = 'index.html';  // Redirect to home page or another page
+        } else {
+          alert('Error: ' + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error submitting order:', error);
+        alert('There was an error submitting your order. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
