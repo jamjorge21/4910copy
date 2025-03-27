@@ -1,31 +1,47 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
-  
-  .container {
-    margin-top: 50px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .products {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
-  }
-  
-  .product {
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 10px;
-  }
-  
-  .service {
-    margin: 20px;
-  }
-  
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-image: url('images/official.jpg');  /* Add your image path here */
+  background-size: cover;  /* Ensures the image covers the entire page */
+  background-position: center;  /* Centers the image */
+  background-repeat: no-repeat;  /* Prevents the image from repeating */
+  height: 100vh;  /* Makes the body take full height */
+  color: white;  /* Light text color for readability */
+}
+
+.container {
+  margin-top: 50px;
+  z-index: 1;  /* Ensure container stays on top of the background */
+  position: relative;  /* Required to make z-index work */
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.7);  /* Slightly darker background for the buttons */
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;  /* Add rounded corners for a smoother look */
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);  /* Darker on hover for interactivity */
+}
+
+.products {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+}
+
+.service {
+  margin: 20px;
+}
