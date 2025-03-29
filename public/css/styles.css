@@ -1,47 +1,133 @@
+/* Global Styles */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-image: url('images/official.jpg');  /* Add your image path here */
-  background-size: cover;  /* Ensures the image covers the entire page */
-  background-position: center;  /* Centers the image */
-  background-repeat: no-repeat;  /* Prevents the image from repeating */
-  height: 100vh;  /* Makes the body take full height */
-  color: white;  /* Light text color for readability */
+  background-image: url('images/official.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  color: white;
+  margin: 0;
+  overflow-y: auto;
 }
 
 .container {
   margin-top: 50px;
-  z-index: 1;  /* Ensure container stays on top of the background */
-  position: relative;  /* Required to make z-index work */
+  z-index: 1;
+  position: relative;
 }
 
 button {
   padding: 10px 20px;
   margin: 10px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.7);  /* Slightly darker background for the buttons */
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
   font-size: 16px;
-  border-radius: 5px;  /* Add rounded corners for a smoother look */
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: rgba(0, 0, 0, 0.8);  /* Darker on hover for interactivity */
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .products {
   display: flex;
   justify-content: space-around;
   margin-top: 50px;
+  padding: 0 20px;
+  gap: 20px;
 }
 
 .product {
-  border: 1px solid #ddd;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
   padding: 20px;
-  margin: 10px;
+  color: white;
+  width: 300px;
+  text-align: left;
+  transition: transform 0.3s;
 }
 
-.service {
-  margin: 20px;
+.product:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overlay button {
+  width: 150px;
+  margin: 5px;
+}
+
+/* Header Section */
+header {
+  display: flex;
+  align-items: center; /* Vertically align logo and text */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7); /* Optional: Add background to header */
+}
+
+.logo-container {
+  margin-right: 20px; /* Adds space between logo and heading */
+}
+
+.logo {
+  width: 50px; /* Adjust the size of the logo */
+  height: auto;
+}
+
+h1 {
+  font-size: 2em; /* Adjust the font size of the heading */
+  color: white; /* Text color */
+  margin: 0; /* Remove default margin */
+}
+
+
+
+/* Hero Section */
+.hero {
+  background-image: url('images/hero.jpg'); /* Set the path to your hero image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-content h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 12px 30px;
+  font-size: 18px;
+  margin: 10px;
 }
