@@ -7,25 +7,35 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Choose Your Consultation</h1>
+  <header>
+    <h1 class="main-title">Coyote Recovery Service</h1>
+  </header>
 
-  <button onclick="window.history.back()">Go Back</button>
+  <section class="hero">
+    <h2>Choose Your Consultation</h2>
+    <p>Select one of the options below to proceed with your recovery service.</p>
+    <button onclick="window.history.back()">← Go Back</button>
+  </section>
 
-  <div class="products">
-    <div class="product">
-      <h2>30 Minutes Consultation</h2>
-      <p>$150</p>
-      <button onclick="window.location.href='checkout.html?service=30-minutes-consultation&price=150'">Checkout</button>
-    </div>
-    <div class="product">
-      <h2>1 Hour Consultation</h2>
-      <p>$300</p>
-      <button onclick="window.location.href='checkout.html?service=1-hour-consultation&price=300'">Checkout</button>
-    </div>
-    <div class="product">
-      <h2>2 Hour Consultation</h2>
-      <p>$500</p>
-      <button onclick="window.location.href='checkout.html?service=2-hour-consultation&price=500'">Checkout</button>
+  <div class="product-wrapper"> <!-- Added wrapper to center content -->
+    <div class="product-container">
+      <div class="product" onclick="window.location.href='checkout.html?service=30-minutes-consultation&price=150'">
+        <h2>30 Minutes Consultation</h2>
+        <p>$150</p>
+        <button>Checkout</button>
+      </div>
+      
+      <div class="product" onclick="window.location.href='checkout.html?service=1-hour-consultation&price=300'">
+        <h2>1 Hour Consultation</h2>
+        <p>$300</p>
+        <button>Checkout</button>
+      </div>
+
+      <div class="product" onclick="window.location.href='checkout.html?service=2-hour-consultation&price=500'">
+        <h2>2 Hour Consultation</h2>
+        <p>$500</p>
+        <button>Checkout</button>
+      </div>
     </div>
   </div>
 

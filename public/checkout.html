@@ -7,27 +7,37 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Checkout</h1>
 
-  <button onclick="window.history.back()">Go Back</button>
+  <header>
+    <h1 class="main-title">Coyote Recovery Service</h1>
+  </header>
 
+  <section class="hero">
+    <h2>Checkout</h2>
+    <p>You're one step away from completing your consultation purchase. Review your selected service below:</p>
+    <button onclick="window.history.back()">← Go Back</button>
+  </section>
 
-  <div id="selected-service">
-    <!-- The selected service and price will be displayed here -->
-    <h3>Service Selected: <span id="service-name"></span></h3>
-    <p>Price: $<span id="service-price"></span></p>
+  <div class="checkout-container">
+    <div class="checkout-card">
+      <h2>Service: <span id="service-name"></span></h2>
+      <p>Price: $<span id="service-price"></span></p>
+      
+      <!-- Form to collect user information -->
+      <form id="checkout-form">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first-name" required>
+
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last-name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
-
-  <h2>Enter Your Information</h2>
-  <form id="checkout-form">
-    <label for="first-name">First Name</label>
-    <input type="text" id="first-name" name="first-name" required>
-    <label for="last-name">Last Name</label>
-    <input type="text" id="last-name" name="last-name" required>
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" required>
-    <button type="submit">Submit</button>
-  </form>
 
   <script>
     // Retrieve the service and price from the URL
@@ -67,7 +77,7 @@
       .then(data => {
         if (data.message === 'Order submitted successfully') {
           alert('Your order has been submitted successfully!');
-          window.location.href = 'index.html';  // Redirect to home page or another page
+          window.location.href = 'index.html';  // Redirect to the home page after successful submission
         } else {
           alert('Error: ' + data.error);
         }
@@ -78,5 +88,6 @@
       });
     });
   </script>
+
 </body>
 </html>

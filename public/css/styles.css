@@ -34,6 +34,112 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Header Section */
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+  font-size: 2em;
+  color: white;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2em;
+  color: white;
+  margin: 0;
+}
+
+.logo {
+  width: 30px;  /* Adjust the width to make it smaller */
+  height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+}
+
+footer {
+  background-color: black; /* Sets the footer background to black */
+  color: white; /* Ensures the text inside the footer is readable (white color on black background) */
+  padding: 20px 0; /* Adds some padding for spacing */
+  text-align: center; /* Centers the text inside the footer */
+}
+
+
+/* Hero Section */
+.hero {
+  background-image: url('images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-content h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 12px 30px;
+  font-size: 18px;
+  margin: 10px;
+}
+
+/* Service Container (for Our Services page) */
+.service-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 0px;
+}
+
+.service-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 30px;
+  color: white;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.service-icon img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.service-card h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.service-card ul {
+  list-style-type: none;
+  padding-left: 0;
+  text-align: left;
+}
+
+.service-card ul li {
+  margin: 5px 0;
+}
+
+/* Products Section (for Shop page) */
 .products {
   display: flex;
   justify-content: space-around;
@@ -81,34 +187,9 @@ button:hover {
   margin: 5px;
 }
 
-/* Header Section */
-header {
-  display: flex;
-  align-items: center; /* Vertically align logo and text */
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.7); /* Optional: Add background to header */
-}
-
-.logo-container {
-  margin-right: 20px; /* Adds space between logo and heading */
-}
-
-.logo {
-  width: 50px; /* Adjust the size of the logo */
-  height: auto;
-}
-
-h1 {
-  font-size: 2em; /* Adjust the font size of the heading */
-  color: white; /* Text color */
-  margin: 0; /* Remove default margin */
-}
-
-
-
-/* Hero Section */
+/* Shop Page Hero Section */
 .hero {
-  background-image: url('images/hero.jpg'); /* Set the path to your hero image */
+  background-image: url('images/hero.jpg');
   background-size: cover;
   background-position: center;
   color: white;
@@ -130,4 +211,72 @@ h1 {
   padding: 12px 30px;
   font-size: 18px;
   margin: 10px;
+}
+
+/* Shop Page Product Container */
+.product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 50px;
+}
+
+.product {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  width: 300px;
+  text-align: left;
+  transition: transform 0.3s;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}
+
+/* Checkout Page Styles */
+.checkout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.checkout-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  color: white;
+  width: 400px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.checkout-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout-card input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkout-card button {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkout-card button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
