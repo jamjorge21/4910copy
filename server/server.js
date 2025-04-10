@@ -4,8 +4,18 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
+const crypto = require('crypto');
+
 const app = express();
 const port = 3000;
+
+// Your secret passphrase (use a secure method to store this in production)
+const ENCRYPTION_PASSPHRASE = 'your-secret-passphrase-here';
+
+// Generate a 32-byte key using the passphrase (SHA-256 hash)
+const ENCRYPTION_KEY = crypto.createHash('sha256').update(ENCRYPTION_PASSPHRASE).digest('hex').slice(0, 32); // 32-byte key
+
+const IV_LENGTH = 16; // AES block size
 
 // Read SSL certificates
 const privateKey = fs.readFileSync('localhost-key.pem', 'utf8');
@@ -31,6 +41,26 @@ db.connect(err => {
   console.log('Connected to the database');
 });
 
+// Function to encrypt data
+function encrypt(text) {
+  const iv = crypto.randomBytes(IV_LENGTH);
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return iv.toString('hex') + ':' + encrypted; // Store IV along with the encrypted text
+}
+
+// Function to decrypt data
+function decrypt(text) {
+  const textParts = text.split(':');
+  const iv = Buffer.from(textParts[0], 'hex');
+  const encryptedText = textParts[1];
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+  let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted;
+}
+
 // Route to handle order submission
 app.post('/submit-order', (req, res) => {
   const { first_name, last_name, email, service, price, card_number, expiration_date, zip_code, cvv } = req.body;
@@ -42,6 +72,10 @@ app.post('/submit-order', (req, res) => {
     console.error('Missing required fields');
     return res.status(400).json({ error: 'All fields are required.' });
   }
+
+  // Encrypt sensitive data
+  const encryptedCardNumber = encrypt(card_number);
+  const encryptedCVV = encrypt(cvv);
 
   // Log data types to ensure they are as expected
   console.log('Data Types:', {
@@ -64,7 +98,7 @@ app.post('/submit-order', (req, res) => {
 
   const query = 'INSERT INTO orders (first_name, last_name, email, service, price, card_number, expiration_date, zip_code, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
   
-  db.query(query, [first_name, last_name, email, service, price, card_number, formattedExpirationDate, zip_code, cvv], (err, result) => {
+  db.query(query, [first_name, last_name, email, service, price, encryptedCardNumber, formattedExpirationDate, zip_code, encryptedCVV], (err, result) => {
     if (err) {
       console.error('Error inserting order:', err);  // Log any error that occurs
       return res.status(500).json({ error: 'Failed to submit order' });
@@ -76,6 +110,6 @@ app.post('/submit-order', (req, res) => {
 });
 
 // Create HTTPS server
-https.createServer(credentials, app).listen(3000, () => {
+https.createServer(credentials, app).listen(3000, 'localhost', () => {
   console.log('Server is running on https://localhost:3000');
 });
